@@ -137,7 +137,7 @@ G4double EnergyToRangeConverter::Convert(G4double KineticEnergy,
   
   // Build range vector for every material, convert cut into energy-cut,
   // fill theKineticEnergyCuts and delete the range vector
-  static const G4double tune = 0.025*mm*g/cm3 ,lowen = 30.*keV ; 
+  //static const G4double tune = 0.025*mm*g/cm3 ,lowen = 30.*keV ; 
 
   // check density
   G4double density = material->GetDensity() ;
@@ -150,11 +150,14 @@ G4double EnergyToRangeConverter::Convert(G4double KineticEnergy,
     return 0.;
   }
  
+/* 
    // initialize RangeVectorStore
   const G4MaterialTable* table = G4Material::GetMaterialTable();
   G4int ext_size = table->size() - fRangeVectorStore.size();
   for (int i=0; i<ext_size; i++) fRangeVectorStore.push_back(0);
-  
+*/
+
+/*
   // Build Range Vector
   G4int idx = material->GetIndex(); 
   G4RangeVector* rangeVector = fRangeVectorStore.at(idx);
@@ -163,9 +166,15 @@ G4double EnergyToRangeConverter::Convert(G4double KineticEnergy,
     BuildRangeVector(material, rangeVector);
     fRangeVectorStore.at(idx) = rangeVector;
   }
+*/
+
+  // Build Range Vector
+  G4RangeVector* rangeVector = new G4RangeVector(LowestEnergy, MaxEnergyCut, TotBin); 
+  BuildRangeVector(material, rangeVector);
+
 
   // Convert Kinetic Energy Cut to Range Cut 
-  theKineticEnergyCuts = ConvertEnergyToCut(rangeVector, KineticEnergy, idx);
+  theKineticEnergyCuts = ConvertEnergyToCut(rangeVector, KineticEnergy);
   
 //   if( ((theParticle->GetParticleName()=="e-")||(theParticle->GetParticleName()=="e+"))
 //       && (theKineticEnergyCuts < lowen) ) {
@@ -242,12 +251,14 @@ void EnergyToRangeConverter::Reset()
   }
   theLossTable=0;
   NumberOfElements=0;
-  
+  /*
   //clear RangeVectorStore
   for (size_t idx=0; idx<fRangeVectorStore.size(); idx++){
     delete fRangeVectorStore.at(idx);
   }
   fRangeVectorStore.clear();
+*/
+    
 } 
 
 
@@ -341,11 +352,11 @@ void EnergyToRangeConverter::BuildRangeVector(const G4Material* aMaterial,
 // **********************************************************************
 G4double EnergyToRangeConverter::ConvertEnergyToCut(
                     G4RangeVector* rangeVector,
-                    G4double       kineticenergy, 
-                    size_t         materialIndex) const
+                    G4double       kineticenergy) const
 {
     G4double range;
     range = rangeVector->Value(kineticenergy);
+    return range;	
 }
 
 

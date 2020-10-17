@@ -20,7 +20,7 @@ EToRConvForElectron::EToRConvForElectron()
   theParticle =  G4ParticleTable::GetParticleTable()->FindParticle("e-");
   if (theParticle ==0) {
 
-      G4cout << " G4RToEConvForElectron::G4RToEConvForElectron() ";
+      G4cout << " EToRConvForElectron::EToRConvForElectron() ";
       G4cout << " Electron is not defined !!" << G4endl;
 
   } else {

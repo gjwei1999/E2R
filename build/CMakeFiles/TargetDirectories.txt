@@ -1,3 +1,0 @@
-/home/jiaweiguo/work/E2R/build/CMakeFiles/rebuild_cache.dir
-/home/jiaweiguo/work/E2R/build/CMakeFiles/main.dir
-/home/jiaweiguo/work/E2R/build/CMakeFiles/edit_cache.dir
