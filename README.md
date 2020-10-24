@@ -1,6 +1,10 @@
 # E2R
 
+## description
+
 Function EToRConvert in EToRConvert.cc can convert production cuts in energy to cuts in length for electron, gamma, positron, and proton.
+
+## example
 
 example主体来自Geant4 example/basic/B1（任意一个可以运行的Geant4程序都可以）
 
